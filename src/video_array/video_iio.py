@@ -17,13 +17,11 @@ class Video:
         self.width = self.shape[2]
         self.height = self.shape[1]
         self.nframes = self.shape[0]
-        print(self.nframes)
         self.total_seconds = self.nframes/self.fps
         if self.nframes < 1:
             self.nframes, self.total_seconds = self.calc_duration()
             self.shape = (self.nframes, self.height, self.width, 3)
         
-        print(self.nframes)
         self.current_frame = self.nframes//2
         self.dtype = np.uint8
         self.size = self.width*self.height*self.nframes*3
