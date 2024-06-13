@@ -1,17 +1,14 @@
-import os
-import glob
-import pickle
 
 import imageio.v3 as iio
 import numpy as np
 
 
 class Video:
-    
+
     def __init__(self, filename):
         self.filename = filename
         self.vo = iio.imopen(filename, 'r', plugin='pyav')
-        
+
         self.fps = self.vo.metadata()['fps']
         self.shape = self.vo.properties().shape
         self.width = self.shape[2]
@@ -21,7 +18,7 @@ class Video:
         if self.nframes < 1:
             self.nframes, self.total_seconds = self.calc_duration()
             self.shape = (self.nframes, self.height, self.width, 3)
-        
+
         self.current_frame = self.nframes//2
         self.dtype = np.uint8
         self.size = self.width*self.height*self.nframes*3
